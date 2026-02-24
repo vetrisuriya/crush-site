@@ -20,15 +20,8 @@ export default function CrushSite() {
 
   const sadTimeout = useRef(null);
 
-  // SHY OFFSETS — first position clearly visible, others hide behind Yes
-  const OFFSETS = [
-    { x: 0, y: 0 },        // clearly visible initial
-    { x: -80, y: 0 },
-    { x: -120, y: 20 },
-    { x: -120, y: -20 },
-    { x: -160, y: 30 },
-    { x: -160, y: -30 }
-  ];
+  // Movement disabled — keeping for reference but not used
+  const OFFSETS = [{ x: 0, y: 0 }];
 
   const [noIndexLocal, setNoIndexLocal] = useState(0);
   const [noOffset, setNoOffset] = useState({ x: 0, y: 0 });
@@ -53,22 +46,17 @@ export default function CrushSite() {
   }
 
   function moveNo() {
-    // On small screens or touch devices, keep stationary but show sad animation
-    if (typeof window !== "undefined" && window.innerWidth < 640) {
-      triggerSad(true);
-      return;
-    }
-    // cycle index and set pixel offset with spring animation
-    const next = (noIndexLocal + 1) % OFFSETS.length;
-    setNoIndexLocal(next);
-    setNoOffset(OFFSETS[next]);
+    // movement disabled — button stays in place (cleaned buggy code)
+    return;
   }
 
   function handleNoClick() {
-    // show a clear shake/cry animation on the button itself
+    // Show ONLY the Vadivelu GIF (avoid double popup)
     setNoAnim(true);
-    triggerSad(false);
-    setTimeout(() => setNoAnim(false), 1200);
+    // ❌ Removed triggerSad here because it caused the second popup
+    // keep GIF visible longer so she can notice 😏
+    // keep GIF visible much longer so it is clearly noticed 😏
+    setTimeout(() => setNoAnim(false), 5500);
   }
 
   function handleYes() {
@@ -140,15 +128,13 @@ export default function CrushSite() {
           className="relative z-30 px-10 py-4 rounded-full shadow-2xl text-white font-bold text-lg bg-gradient-to-r from-rose-400 via-pink-500 to-fuchsia-500 flex items-center gap-3"
         >
           <span className="text-2xl">🥰</span>
-          Pesalam!
+          Paakalam!
         </motion.button>
 
         {/* NO BUTTON — shy behavior: slides left as if hiding behind Yes */}
         <motion.button
-          onMouseEnter={moveNo}
           onClick={handleNoClick}
-          animate={{ x: noOffset.x, y: noOffset.y }}
-          transition={{ type: "spring", stiffness: 420, damping: 30 }}
+          animate={{ x: 0, y: 0 }}
           className="relative z-20 px-6 py-3 bg-white rounded-full shadow font-semibold border border-gray-200 overflow-visible"
           style={{ minWidth: 120 }}
         >
@@ -161,7 +147,7 @@ export default function CrushSite() {
               exit={{ scale: 0, opacity: 0 }}
               transition={{ type: "spring", stiffness: 420, damping: 22 }}
               className="absolute left-1/2 -translate-x-1/2 z-[9999] pointer-events-none rounded-lg shadow-lg"
-              style={{ top: "-110px", width: "120px" }}
+              style={{ top: "-100px", left: "-100px", width: "280px" }}
             />
           )}
 
@@ -223,7 +209,7 @@ export default function CrushSite() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                Epdi iruka Parvati! 💫
+                Epdi iruka Bharathi (Parvati)! 💫
               </motion.p>
             </motion.div>
           )}
@@ -256,7 +242,20 @@ export default function CrushSite() {
                 <ButtonsGroup />
               </div>
 
-              <p className="mt-6 text-sm text-gray-500">(Careful… the No button is shy 😜)</p>
+              {/* Romantic YouTube video */}
+              <div className="mt-10 w-full flex justify-center">
+                <div className="w-full max-w-2xl aspect-video rounded-2xl overflow-hidden shadow-2xl border border-pink-200">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/knkNX-_Zp5w?start=156&rel=0"
+                    title="romantic video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
