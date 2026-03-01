@@ -231,7 +231,7 @@ export default function CrushSite() {
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
               >
-                Enkooda Pesuviya Maa! ✨
+                Enkooda Pesamaatiya Maa! ✨
               </motion.h2>
 
               <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 relative">
